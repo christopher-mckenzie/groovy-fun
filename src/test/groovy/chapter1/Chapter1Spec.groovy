@@ -17,7 +17,8 @@ class Chapter1Spec extends Specification{
         pogo.setPriority 0
         pogo.setStartDate Calendar.instance.getTime()
         pogo.setEndDate Calendar.instance.getTime()
-
+        //or pass map to constructor
+        //new POGO(name:'test 1', priority: 0, startDate: Calendar.instance.getTime(), endDate: Calendar.instance.getTime())
         then:
         println pogo.toString()
 

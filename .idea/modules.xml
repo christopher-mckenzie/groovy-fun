@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/groovy-fun.iml" filepath="$PROJECT_DIR$/groovy-fun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/groovy-fun.iml" filepath="$PROJECT_DIR$/.idea/modules/groovy-fun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/groovy-fun_main.iml" filepath="$PROJECT_DIR$/.idea/modules/groovy-fun_main.iml" group="groovy-fun" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/groovy-fun_test.iml" filepath="$PROJECT_DIR$/.idea/modules/groovy-fun_test.iml" group="groovy-fun" />
     </modules>
   </component>
 </project>
