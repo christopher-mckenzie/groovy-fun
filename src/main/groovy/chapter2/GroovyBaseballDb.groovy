@@ -8,7 +8,7 @@ import groovy.sql.Sql
  */
 class GroovyBaseballDb {
 
-    def populateDatabase(Stadium stadium){
+    def populateDatabase(List<Stadium> stadiums){
         Sql db = Sql.newInstance(
                 'jdbc:mysql://localhost:3306/baseball',
                 '...username...',
@@ -29,16 +29,21 @@ class GroovyBaseballDb {
             );
         '''
         GroovyBaseballGeocoder geocoder = new GroovyBaseballGeocoder()
-        stadium = geocoder.fillInLatLng(stadium)
-        db.execute """
+        stadiums.each { stadium ->
+            stadium = geocoder.fillInLatLng(stadium)
+            db.execute """
             insert into stadium(name, city, state, team, latitude, longitude)
-            values(${stadium.name}, ${stadium.city}, ${stadium.state}, ${stadium.team}, ${stadium.latitude}, ${stadium.longitude});
-        """
+            values(${stadium.name}, ${stadium.city}, ${stadium.state}, ${stadium.team}, ${stadium.latitude}, ${
+                stadium.longitude
+            });
+            """
+        }
 //        test results ->
 //        assert db.rows('select * from stadium').size() == stadiums.size()
 //        db.eachRow('select latitude, longitude from stadium'){ row ->
 //            assert row.latitude > 25 && row.latitude < 48
 //            assert row.longitude > -123 && row.longitude < -71
 //        }
+
     }
 }
