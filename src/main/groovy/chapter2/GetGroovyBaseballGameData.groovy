@@ -1,7 +1,10 @@
 package chapter2
 
+import chapter2.bean.GameResult
 import chapter2.bean.Stadium
 import groovy.sql.Sql
+
+import java.util.regex.Matcher
 
 /**
  * Created by req85404 on 02/14/2017.
@@ -45,5 +48,47 @@ class GetGroovyBaseballGameData {
             stadiumMap[stadium.team] = stadium
         }
         db.close()
+    }
+    def getGame(away, home, num){
+        println "${abbreviations[away]} at ${abbreviations[home]} on ${month}/${day}/${year}"
+        def url = base + "year_${year}/month_${month}/day_${day}/"
+        def game = "gid_${year}_${month}_${day}_${away}mlb_${home}mlb_${num}/boxscore.xml"
+        def boxscore = new XmlParser().parse("$url$game")
+        def awayName = boxscore.@away_fname
+        def awayScore = boxscore.linescore[0].@away_team_runs
+        def homeName = boxscore.@home_fname
+        def homeScore = boxscore.linescore[0].@home_team_runs
+        println "$awayName $awayScore, $homeName $homeScore (game $num)"
+        GameResult result = new GameResult(
+                home:homeName,
+                away:awayName,
+                hScore:homeScore,
+                aScore: awayScore,
+                stadium:stadiumMap[home]
+        )
+        return result
+    }
+    def getGames(){
+        def gameResults = []
+        println "Games for ${month}/${day}/${year}"
+        String url = base + "year_$year/month_$month/day_$day/"
+        String gamePage = url.toURL().text
+        def pattern = /\"gid_${year}_${month}_${day}_(\w*)mlb_(\w*)mlb_(\d)/
+
+        Matcher m = gamePage =~ pattern
+        if(m) {
+            m.count.times { line ->
+                String away = m[line][1]
+                String home = m[line][2]
+                String num = m[line][3]
+                try {
+                    GameResult gr = this.getGame(away, home, num)
+                    gameResults << gr
+                } catch (Exception e){
+                    println "${abbreviations[away]} at ${abbreviations[home]} not started yet"
+                }
+            }
+        }
+        return gameResults
     }
 }
