@@ -54,8 +54,9 @@ class BaseballGameDataDao {
         println "${abbreviations[away]} at ${abbreviations[home]} on ${month}/${day}/${year}"
         def url = base + "year_${year}/month_${month}/day_${day}/"
         def game = "gid_${year}_${month}_${day}_${away}mlb_${home}mlb_${num}/boxscore.xml"
-        def boxscore = new XmlParser().parse("$url$game")
-        def awayName = boxscore.@away_fname
+
+        def boxscore = new XmlParser().parse("$url$game") //parse xml -> turns xml into DOM
+        def awayName = boxscore.@away_fname //@ represents an attribute of xml DOM
         def awayScore = boxscore.linescore[0].@away_team_runs
         def homeName = boxscore.@home_fname
         def homeScore = boxscore.linescore[0].@home_team_runs
@@ -76,10 +77,10 @@ class BaseballGameDataDao {
         String gamePage = url.toURL().text
         def pattern = /\"gid_${year}_${month}_${day}_(\w*)mlb_(\w*)mlb_(\d)/
 
-        Matcher m = gamePage =~ pattern
+        Matcher m = gamePage =~ pattern // =~ returns an instance of jva.util.regex.Matchere
         if(m) {
             m.count.times { line ->
-                String away = m[line][1]
+                String away = m[line][1] //extracted from the Matcher
                 String home = m[line][2]
                 String num = m[line][3]
                 try {
