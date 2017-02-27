@@ -8,7 +8,7 @@ import java.awt.BorderLayout
 /**
  * Created by cmcke on 2/12/2017.
  */
-class GoogleUrl {
+class GoogleUrl_HelloWorld {
 
     static main( def args) {
         String base = 'http://chart.apis.google.com/chart?'
