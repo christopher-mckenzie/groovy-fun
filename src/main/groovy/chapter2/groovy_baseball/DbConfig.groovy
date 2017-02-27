@@ -1,4 +1,4 @@
-package chapter2
+package chapter2.groovy_baseball
 
 import chapter2.bean.Stadium
 import groovy.sql.Sql
@@ -6,7 +6,7 @@ import groovy.sql.Sql
 /**
  * Created by req85404 on 02/13/2017.
  */
-class GroovyBaseballDb {
+class DbConfig {
 
     def populateDatabase(List<Stadium> stadiums){
         Sql db = Sql.newInstance(
@@ -28,7 +28,7 @@ class GroovyBaseballDb {
                 primary key(id)
             );
         '''
-        GroovyBaseballGeocoder geocoder = new GroovyBaseballGeocoder()
+        BaseballGeocoder geocoder = new BaseballGeocoder()
         stadiums.each { stadium ->
             stadium = geocoder.fillInLatLng(stadium)
             db.execute """

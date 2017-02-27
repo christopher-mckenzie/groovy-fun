@@ -1,4 +1,4 @@
-package chapter2
+package chapter2.hello_world_pie_chart
 
 import groovy.swing.SwingBuilder
 import javax.swing.ImageIcon
@@ -8,7 +8,7 @@ import java.awt.BorderLayout
 /**
  * Created by cmcke on 2/12/2017.
  */
-class GoogleUrl_HelloWorld {
+class GoogleUrl {
 
     static main( def args) {
         String base = 'http://chart.apis.google.com/chart?'

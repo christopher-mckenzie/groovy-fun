@@ -1,4 +1,4 @@
-package chapter2
+package chapter2.groovy_baseball
 
 import chapter2.bean.GameResult
 import chapter2.bean.Stadium
@@ -9,7 +9,7 @@ import java.util.regex.Matcher
 /**
  * Created by req85404 on 02/14/2017.
  */
-class GetGroovyBaseballGameData {
+class BaseballGameDataDao {
     def day
     def month
     def year
@@ -29,7 +29,8 @@ class GetGroovyBaseballGameData {
             sfn:'San Francisco',    sln:'St. Louis',    tba:'Tampa Bay',
             tex:'Texas',            tor:'Toronto',      was:'Washington'
     ]
-    GetGroovyBaseballGameData(){
+
+    BaseballGameDataDao(){
         fillInStadiumMap()
     }
 

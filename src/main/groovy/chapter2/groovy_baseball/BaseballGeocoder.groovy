@@ -1,11 +1,11 @@
-package chapter2
+package chapter2.groovy_baseball
 
 import chapter2.bean.Stadium
 
 /**
  * Created by req85404 on 02/13/2017.
  */
-class GroovyBaseballGeocoder {
+class BaseballGeocoder {
     def base = 'http://maps.googleapis.com/maps/api/geocode/xml?'
 
     def fillInLatLng(Stadium stadium){

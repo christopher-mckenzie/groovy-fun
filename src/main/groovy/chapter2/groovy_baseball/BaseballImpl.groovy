@@ -1,11 +1,11 @@
-package chapter2
+package chapter2.groovy_baseball
 
 import chapter2.bean.Stadium
 
 /**
  * Created by req85404 on 02/13/2017.
  */
-class GroovyBaseball {
+class BaseballImpl {
     def stadiums =  {
         //<< append method
         stadiums <<
